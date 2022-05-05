@@ -33,38 +33,4 @@ instance.interceptors.response.use(
   }
 );
 
-/**
- * get请求
- * @param {*} url     请求地址
- * @param {*} params
- */
-export function get(url: string, params: any) {
-  return instance.get(url, {
-    params,
-  });
-}
-/**
- * post请求
- * @param {*} url     请求地址
- * @param {*} data
- */
-export function post(url: string, data: any) {
-  return instance.post(url, data);
-}
-
-/**
- * patch请求
- * @param {*} url     请求地址
- * @param {*} data
- */
-export function patch(url: string, data: any) {
-  return instance.put(url, data);
-}
-
-/**
- * delete请求
- * @param {*} url
- */
-export function del(url: string) {
-  return instance.delete(url);
-}
+export default instance;
