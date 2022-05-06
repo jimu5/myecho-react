@@ -1,9 +1,12 @@
 import { useLocalStorageState, useMount } from 'ahooks';
 import React from 'react';
-import Header from '@/components/Header';
 import { connect } from 'react-redux';
-import { storeState } from './redux/interface';
+
+import Header from '@/components/Header';
+import Main from './components/Main';
+
 import { setMode } from './redux/actions';
+import { storeState } from './redux/interface';
 import s from './App.module.scss';
 
 interface Props {
@@ -22,6 +25,7 @@ const App: React.FC<Props> = ({ setMode }) => {
   return (
     <div className={s.AppBox}>
       <Header />
+      <Main />
     </div>
   );
 };

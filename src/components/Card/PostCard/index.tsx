@@ -8,7 +8,7 @@ import Loading from './Loading';
 interface Props {
   title?: string;
   content?: string;
-  date?: number;
+  date?: string;
   tags?: string[];
   loading?: boolean;
   onClick?: MouseEventHandler<HTMLDivElement>;
@@ -28,7 +28,7 @@ const PostCard: React.FC<Props> = ({ title, content, date, tags, loading, onClic
           <div className={s.info}>
             <span className={s.date}>{dayjs(date!).format('YYYY-MM-DD')}</span>
             <div className={s.tags}>
-              {tags!.map(tag => (
+              {tags?.map(tag => (
                 <span className={s.tag} key={tag}>
                   {tag}
                 </span>

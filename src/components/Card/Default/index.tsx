@@ -13,7 +13,7 @@ interface Props {
 
 const Card: React.FC<
   Props & {
-    children: JSX.Element;
+    children: React.ReactNode;
   }
 > = ({ children, className, loading, isStatic, onClick }) => {
   return (

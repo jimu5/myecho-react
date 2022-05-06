@@ -1,5 +1,3 @@
-import './pagination.custom.scss';
-
 import { Pagination } from 'antd';
 import React from 'react';
 import { connect } from 'react-redux';
