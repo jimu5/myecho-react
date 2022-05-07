@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import s from './index.module.scss';
 
 const Home = lazy(() => import(/* webpackPrefetch:true */ '@/pages/Home'));
+const Login = lazy(() => import(/* webpackPrefetch:true */ '@/pages/Login'));
 
 const Main: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const Main: React.FC = () => {
         <Suspense fallback={<></>}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
