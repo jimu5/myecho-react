@@ -37,7 +37,6 @@ const Section: React.FC<Props> = ({ articleSum }) => {
 
   return (
     <section className={s.section}>
-      {console.log(data)}
       {data?.data.map(({ id, title, detail, post_time }: article) => (
         <PostCard
           key={id}
