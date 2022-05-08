@@ -1,5 +1,7 @@
-import { baseApiUrl } from "@/utils/config";
 import axios from "axios";
+import { notification } from "antd";
+
+import { baseApiUrl } from "@/utils/config";
 
 const instance = axios.create({
   baseURL: baseApiUrl,
@@ -29,6 +31,10 @@ instance.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
+    notification.error({
+      message: '错误代码: ' + error.response.data.code,
+      description: error.response.data.msg,
+    });
     return Promise.reject(error);
   }
 );

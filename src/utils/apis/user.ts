@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../axios';
 
 export interface user {
     id: number;
@@ -20,7 +20,7 @@ export interface loginResponse {
     token: string;
 }
 
-export class User {
+export class UserApi {
     static login(params: loginParams) {
         return axios.post("/login", params);
     }
