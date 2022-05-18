@@ -4,9 +4,10 @@
 
 .body {
   display: flex;
+  margin-top: 10%;
 }
 
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 992px) {
   .homeTitle {
     height: 50vh;
   }
