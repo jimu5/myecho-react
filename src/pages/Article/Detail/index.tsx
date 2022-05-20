@@ -9,13 +9,21 @@ const Detail: React.FC = () => {
 
   useEffect(() => {
     if (!id) return;
-    ArticleApi.getDetail(id)
-      .then((res:any) => {
-        console.log(res)
-        Vditor.preview(document.getElementById('articleDetail')! as HTMLDivElement, res.detail.content);
-      });
+    ArticleApi.getDetail(id).then((res: any) => {
+      Vditor.preview(
+        document.getElementById('articleDetail')! as HTMLDivElement,
+        res.detail.content
+      );
+    });
   }, [id]);
-  return <div id="articleDetail"></div>;
+  return (
+    <div
+      id="articleDetail"
+      style={{
+        width: '70%',
+        margin: '0 auto',
+      }}></div>
+  );
 };
 
 export default Detail;
