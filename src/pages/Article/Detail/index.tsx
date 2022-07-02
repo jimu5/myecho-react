@@ -1,28 +1,37 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useRequest } from 'ahooks';
+import { Typography } from 'antd';
 import Vditor from 'vditor';
 
-import { ArticleApi } from '@/utils/apis/article';
+import { ArticleApi, article } from '@/utils/apis/article';
+
+import s from './index.module.scss';
+
+const { Title } = Typography;
 
 const Detail: React.FC = () => {
   const { id } = useParams();
+  const articleID = id ? parseInt(id) : 0;
+  const { data } = useRequest(() => {
+    if (articleID === 0) {
+      // 跳转到404页面
+    }
+    return ArticleApi.getDetail(articleID).then() as Promise<article>;
+  });
 
   useEffect(() => {
-    if (!id) return;
-    ArticleApi.getDetail(id).then((res: any) => {
-      Vditor.preview(
-        document.getElementById('articleDetail')! as HTMLDivElement,
-        res.detail.content
-      );
-    });
-  }, [id]);
+    if (!data) return;
+    Vditor.preview(
+      document.getElementById('articleDetail')! as HTMLDivElement,
+      data!.detail.content
+    );
+  }, [data]);
   return (
-    <div
-      id="articleDetail"
-      style={{
-        width: '70%',
-        margin: '0 auto',
-      }}></div>
+    <div className={s.article}>
+      <Title className={s.articleTitle}>{data?.title}</Title>
+      <div id="articleDetail"></div>
+    </div>
   );
 };
 

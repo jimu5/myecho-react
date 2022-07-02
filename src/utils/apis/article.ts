@@ -28,7 +28,7 @@ export class ArticleApi {
   static getList(params?: { page: number; page_size: number }) {
     return axios.get('/articles', { params });
   }
-  static getDetail(id: string, params?: { password?: string }) {
+  static getDetail(id: number, params?: { password?: string }) {
     return axios.get(`/articles/${id}`, { params });
   }
 }

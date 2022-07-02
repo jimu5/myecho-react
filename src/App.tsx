@@ -1,8 +1,9 @@
 import { useLocalStorageState, useMount } from 'ahooks';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Layout } from 'antd';
 
-import Header from '@/components/Header';
+import HeaderContent from '@/components/Header';
 import Main from './components/Main';
 
 import { setMode } from './redux/actions';
@@ -25,7 +26,7 @@ const App: React.FC<Props> = ({ setMode }) => {
 
   return (
     <div className={s.AppBox}>
-      <Header />
+      <HeaderContent />
       <Main />
     </div>
   );
