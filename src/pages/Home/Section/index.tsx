@@ -1,4 +1,4 @@
-import { useRequest, useSafeState } from 'ahooks';
+import { usePagination, useSafeState } from 'ahooks';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -8,36 +8,35 @@ import PostCard from '@/components/Card/PostCard';
 import { storeState } from '@/redux/interface';
 import { ArticleApi, article } from '@/utils/apis/article';
 import { pageSize, staleTime } from '@/utils/config';
-import { cacheKey } from '@/utils/cacheKey';
 
 import s from './index.module.scss';
 
 
-interface Props {
-  articleSum?: number;
-}
-
-const Section: React.FC<Props> = ({ articleSum }) => {
+const Section: React.FC = () => {
   const navigate = useNavigate();
-  const [page, setPage] = useSafeState(1);
 
-  const { data, loading } = useRequest(
-    () =>
-      ArticleApi.getList({
-        page,
-        page_size: pageSize
-      }),
-    {
-      retryCount: 3,
-      refreshDeps: [page],
-      cacheKey: `Section-${cacheKey.ArticleList}-${page}`,
-      staleTime
-    }
-  );
+  async function getArticleList(params: {
+    current: number;
+    pageSize: number;
+  }): Promise<{ total: number; list: article[] }> {
+    return ArticleApi.getList({
+      page: params.current,
+      page_size: params.pageSize,
+    }).then((data: any) => {
+      return { total: data.total, list: data.data };
+    });
+  }
+
+  const { data, loading, pagination } = usePagination(getArticleList, {
+    retryCount: 3,
+    // refreshDeps: [],
+    // cacheKey: `Section-${cacheKey.ArticleList}-${page}`,
+    staleTime,
+  });
 
   return (
     <section className={s.section}>
-      {data?.data.map(({ id, title, detail, post_time, tags }: article) => (
+      {data?.list.map(({ id, title, detail, post_time, tags }: article) => (
         <PostCard
           key={id}
           title={title}
@@ -45,19 +44,22 @@ const Section: React.FC<Props> = ({ articleSum }) => {
           date={post_time}
           tags={tags.map(({ name }) => name)}
           loading={loading}
-          onClick={() => navigate(`/article/${id}?title=${encodeURIComponent(title)}`)}
+          onClick={() =>
+            navigate(`/article/${id}?title=${encodeURIComponent(title)}`)
+          }
         />
       ))}
       <Pagination
-        current={page}
+        total={data?.total}
+        current={pagination.current}
         defaultPageSize={pageSize}
-        total={articleSum}
-        setPage={setPage}
-        autoScroll={true}
-        scrollToTop={document.body.clientHeight - 80}
+        pageSize={pagination.pageSize}
+        onChange={pagination.onChange}
       />
     </section>
   );
 };
 
-export default connect((state: storeState) => ({ articleSum: state.articleSum }))(Section);
+export default connect((state: storeState) => ({
+  articleSum: state.articleSum,
+}))(Section);
