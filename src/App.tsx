@@ -1,7 +1,6 @@
 import { useLocalStorageState, useMount } from 'ahooks';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Layout } from 'antd';
 
 import HeaderContent from '@/components/Header';
 import Main from './components/Main';

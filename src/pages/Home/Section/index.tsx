@@ -37,13 +37,13 @@ const Section: React.FC<Props> = ({ articleSum }) => {
 
   return (
     <section className={s.section}>
-      {data?.data.map(({ id, title, detail, post_time }: article) => (
+      {data?.data.map(({ id, title, detail, post_time, tags }: article) => (
         <PostCard
           key={id}
           title={title}
           content={detail.content}
           date={post_time}
-          // tags={} tags 功能还没有实现
+          tags={tags.map(({ name }) => name)}
           loading={loading}
           onClick={() => navigate(`/article/${id}?title=${encodeURIComponent(title)}`)}
         />

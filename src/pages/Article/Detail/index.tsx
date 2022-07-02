@@ -17,7 +17,7 @@ const Detail: React.FC = () => {
     if (articleID === 0) {
       // 跳转到404页面
     }
-    return ArticleApi.getDetail(articleID).then() as Promise<article>;
+    return ArticleApi.get(articleID).then() as Promise<article>;
   });
 
   useEffect(() => {
