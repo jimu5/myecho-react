@@ -7,6 +7,8 @@ import Main from './components/Main';
 
 import { setMode } from './redux/actions';
 import { storeState } from './redux/interface';
+import 'vditor/src/assets/less/index.less';  // 全局引入vditor样式
+
 import s from './App.module.scss';
 import './App.css';
 

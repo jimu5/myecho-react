@@ -12,3 +12,8 @@ declare module '*.sass' {
   const sass: { [className: string]: string };
   export default sass;
 }
+
+declare module "*.module.less" {
+  const classes: { [key: string]: string };
+  export default classes;
+}
