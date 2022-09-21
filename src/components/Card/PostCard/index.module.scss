@@ -13,14 +13,17 @@
 
 .card {
   cursor: pointer;
+  margin-top: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 0px;
 
   .title {
     margin: 0;
     height: 80px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     color: $textColor;
   }
@@ -28,9 +31,8 @@
   .content {
     margin: 0;
     height: 80px;
-    text-indent: 2em;
     color: $textColor;
-    font-size: 18px;
+    font-size: 17px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -41,13 +43,22 @@
   .info {
     position: relative;
     height: 50px;
+    display: flex;
+    align-items: flex-end;
 
     .date {
       @extend .tagBase;
-      position: absolute;
-      bottom: 0;
       display: flex;
       justify-content: center;
+      align-items: center;
+      border-radius: $smallRadius;
+    }
+
+    .view_count {
+      bottom: 0;
+      margin-left: 10px;
+      display: flex;
+      font-size: 16px;
       align-items: center;
     }
 
@@ -61,7 +72,7 @@
       .tag {
         @extend .tagBase;
         display: inline-block;
-        margin-right: 20px;
+        margin-right: 6px;
         text-align: center;
         line-height: 30px;
       }

@@ -36,13 +36,14 @@ const Section: React.FC = () => {
 
   return (
     <section className={s.section}>
-      {data?.list.map(({ id, title, detail, post_time, tags }: article) => (
+      {data?.list.map(({ id, title, detail, post_time, tags, read_count}: article) => (
         <PostCard
           key={id}
           title={title}
           content={detail.content}
           date={post_time}
           tags={tags.map(({ name }) => name)}
+          view_count={read_count}
           loading={loading}
           onClick={() =>
             navigate(`/article/${id}?title=${encodeURIComponent(title)}`)
