@@ -2,10 +2,49 @@
 
 .article {
   margin: auto;
-  padding: 40px;
+  padding: 0 226px 20px 20px;
   max-width: 800px;
 }
+
 .articleTitle {
   margin-top: 60px;
   text-align: center;
+}
+
+.outline {
+  display: none;
+  position: fixed;
+  width: 186px;
+  top: 64px;
+  right: 20px;
+  bottom: 20px;
+  overflow: auto;
+  font-size: 12px;
+  border-left: 1px solid var(--border-color);
+  border-right: 0;
+  --border-color: #eee;
+  --toolbar-icon-hover-color: #4285f4;
+  --textarea-text-color: #616161;
+  --hover-background-color: #f6f8fa;
+}
+
+.outline.dark {
+  --border-color: #d1d5da;
+  --toolbar-icon-hover-color: #fff;
+  --textarea-text-color: #a6aab0;
+  --hover-background-color: #444d56;
+}
+
+@media screen and (max-width: 768px) {
+  .article {
+    padding: 0 20px 20px 0;
+  }
+
+  .outline {
+    display: none !important;
+  }
+}
+.vditor-img__img {
+  max-width: 100%;
+  max-height: 100%;
 }
