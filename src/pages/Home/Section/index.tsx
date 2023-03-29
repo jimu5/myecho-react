@@ -40,7 +40,7 @@ const Section: React.FC = () => {
         <PostCard
           key={id}
           title={title}
-          content={detail.content}
+          content={detail?.content}
           date={post_time}
           tags={tags.map(({ name }) => name)}
           view_count={read_count}

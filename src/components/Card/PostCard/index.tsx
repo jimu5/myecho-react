@@ -24,8 +24,8 @@ const PostCard: React.FC<Props> = ({ title, content, date, tags, view_count, loa
       ) : (
         <>
           <div className={s.title}>{title}</div>
-          <p className={s.content}>
-            {content!.replace(/<a(.*?)>(.*?)<\/a>/g, '$2').replace(/[# |**|`|>]/g, '')}
+          <p className={s?.content}>
+            {content?.replace(/<a(.*?)>(.*?)<\/a>/g, '$2').replace(/[# |**|`|>]/g, '')}
           </p>
           <div className={s.info}>
             <span className={s.date}>
