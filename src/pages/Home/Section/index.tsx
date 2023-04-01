@@ -1,7 +1,7 @@
 import { usePagination, useSafeState } from 'ahooks';
 import React from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination/Default';
 import PostCard from '@/components/Card/PostCard';
@@ -14,7 +14,9 @@ import s from './index.module.scss';
 
 const Section: React.FC = () => {
   const navigate = useNavigate();
-
+  const [queryParam, setQueryParam] = useSearchParams()
+  var queryParamPage = Number(queryParam.get("page")) === 0 ? 1 : Number(queryParam.get("page"))
+  var queryParamPageSize = Number(queryParam.get("page_size")) === 0 ? pageSize : Number(queryParam.get("page_size"))
   async function getArticleList(params: {
     current: number;
     pageSize: number;
@@ -28,7 +30,17 @@ const Section: React.FC = () => {
   }
 
   const { data, loading, pagination } = usePagination(getArticleList, {
+    defaultParams: [{
+      current: queryParamPage,
+      pageSize: queryParamPageSize
+    }],
     retryCount: 3,
+    onSuccess: (_, params) => {
+      let current = params[0].current
+      if (current !== 0) {
+        setQueryParam({page: String(params[0].current)})
+      }
+    },
     // refreshDeps: [],
     // cacheKey: `Section-${cacheKey.ArticleList}-${page}`,
     staleTime,
@@ -36,7 +48,7 @@ const Section: React.FC = () => {
 
   return (
     <section className={s.section}>
-      {data?.list.map(({ id, title, detail, post_time, tags, read_count}: article) => (
+      {data?.list.map(({ id, title, detail, post_time, tags, read_count }: article) => (
         <PostCard
           key={id}
           title={title}
