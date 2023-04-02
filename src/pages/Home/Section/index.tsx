@@ -1,7 +1,7 @@
-import { usePagination, useSafeState } from 'ahooks';
+import { usePagination } from 'ahooks';
 import React from 'react';
 import { connect } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination/Default';
 import PostCard from '@/components/Card/PostCard';
@@ -14,6 +14,7 @@ import s from './index.module.scss';
 
 const Section: React.FC = () => {
   const navigate = useNavigate();
+  const { categoryUID } = useParams()
   const [queryParam, setQueryParam] = useSearchParams()
   var queryParamPage = Number(queryParam.get("page")) === 0 ? 1 : Number(queryParam.get("page"))
   var queryParamPageSize = Number(queryParam.get("page_size")) === 0 ? pageSize : Number(queryParam.get("page_size"))
@@ -24,6 +25,7 @@ const Section: React.FC = () => {
     return ArticleApi.getList({
       page: params.current,
       page_size: params.pageSize,
+      category_uid: categoryUID,
     }).then((data: any) => {
       return { total: data.total, list: data.data };
     });
@@ -38,7 +40,7 @@ const Section: React.FC = () => {
     onSuccess: (_, params) => {
       let current = params[0].current
       if (current !== 0) {
-        setQueryParam({page: String(params[0].current)})
+        setQueryParam({ page: String(params[0].current) })
       }
     },
     // refreshDeps: [],

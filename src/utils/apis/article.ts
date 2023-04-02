@@ -49,9 +49,15 @@ export interface articleRequest {
     tag_ids?: number[];
 }
 
+export interface getArticleListParams {
+    page? :number;
+    page_size?: number;
+    category_uid?: string;
+}
+
 export class ArticleApi {
     // 获取文章列表
-    static getList(params: { page: number; page_size: number;}) {
+    static getList(params: getArticleListParams) {
         return axios.get('/articles', { params });
     }
     static create(params: articleRequest) {

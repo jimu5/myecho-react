@@ -57,7 +57,7 @@ const Header: React.FC<Props> = ({
 
   return (
     <header className={s.header}>
-    {/* <header className={classNames(s.header, { [s.hiddenHeader]: !headerShow})}> */}
+      {/* <header className={classNames(s.header, { [s.hiddenHeader]: !headerShow})}> */}
       {/* header 内容 */}
       <div className={s.headerContent}>
         {/* 主页 */}
@@ -87,7 +87,7 @@ const Header: React.FC<Props> = ({
           <NavLink
             key={index}
             to={item.path}
-            className={({ isActive}) => (isActive ? s.headerActive : s.headerBtn)}
+            className={({ isActive }) => (isActive ? s.headerActive : s.headerBtn)}
           >
             {item.name}
           </NavLink>
